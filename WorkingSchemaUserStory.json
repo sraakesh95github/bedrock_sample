@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "UserStoryRequestAgent API",
+    "description": "An API for creating and updating user story requests",  
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/createUserRequest": {
+      "post": {
+        "summary": "Create a new user story request",
+        "description": "Creatvses a new feature story request with the userStoryName, userStoryDescription, acceptanceCriteria, and returns the feature request ID",
+        "parameters": [
+          {
+            "name": "userStoryName",
+            "in": "query",
+            "description": "Name of the user story request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userStoryDescription",
+            "in": "query",
+            "description": "Full length description of the user story requested",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "acceptanceCriteria",
+            "in": "query",
+            "description": "Acceptance criteria for the user story to be completed",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Priority",
+            "in": "query",
+            "description": "Set priority for the user story to be executed",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Dependencies",
+            "in": "query",
+            "description": "Depencies list",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Tasks",
+            "in": "query",
+            "description": "Sets tasks in alignment with the user story requirements",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TaskAssignee",
+            "in": "query",
+            "description": "Name the person to whom the task needs to be assigned",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userRequestId",
+            "in": "query",
+            "description": "Id of the user request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User story request created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "featureRequestID": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/updateUserRequest": {
+      "get": {
+        "summary": "Update an existing feature request",
+        "description": "Updates an existing featureRequest with the customerName and returns the featureRequestID",
+        "parameters": [
+          {
+            "name": "userRequestId",
+            "in": "query",
+            "description": "ID of the user story request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TaskAssignee",
+            "in": "query",
+            "description": "Update the person to whom the task is assigned to",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        
+        "responses": {
+          "200": {
+            "description": "Feature request updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "featureRequestID": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -19,11 +19,11 @@ class CdkStack(Stack):
         # The code that defines your stack goes here
 
         # Create a SNS topic for feature requests
-        topic = sns.Topic(self, "device-agent-topic")
+        topic = sns.Topic(self, "user-agent-topic")
 
         # Create a Feature requests dynamodb table
-        table = dynamodb.Table(self, "DeviceAgentTable",
-            partition_key=dynamodb.Attribute(name="featureRequestID", type=dynamodb.AttributeType.STRING)
+        table = dynamodb.Table(self, "UserAgentTable",
+            partition_key=dynamodb.Attribute(name="userRequestId", type=dynamodb.AttributeType.STRING)
         )
 
         # Create a lambda execution role 
@@ -52,9 +52,9 @@ class CdkStack(Stack):
         lambda_role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole"))
 
         # Create a lambda function to handle feature requests from the lambda directory
-        lambda_function = _lambda.Function(self, "DeviceAgentHandler",
+        lambda_function = _lambda.Function(self, "UserRequestAgentHandler",
             runtime=_lambda.Runtime.PYTHON_3_9,
-            handler="device_agent_lambda.lambda_handler",
+            handler="user_request_agent_handler.lambda_handler",
             code=_lambda.Code.from_asset("lambda"),
             role=lambda_role
         )
@@ -82,17 +82,18 @@ class CdkStack(Stack):
         lambda_function.add_environment("TOPIC_ARN", topic.topic_arn)
 
         # Add an S3 bucket to the stack to hold schema
-        bucket = s3.Bucket(self, "bedrock-agent-schema-bucket")
-
+        # bucket = s3.Bucket(self, "bedrock-agent-schema-bucket")
+        
+        
         # Output lambda ARN
         CfnOutput(self, "LambdaArn", value=lambda_function.function_arn)
 
         # Output bucket name
-        CfnOutput(self, "SchemaBucket", value=bucket.bucket_name)
+        CfnOutput(self, "SchemaBucket", value="sr-technical")
 
         # Output the AWS CLI command to upload a file to the S3 bucket
         schema_file = "device-agent-schema.json"
-        upload_command = f"aws s3 cp {schema_file} s3://{bucket.bucket_name}/{schema_file}"
+        upload_command = f"aws s3 cp {schema_file} s3://sr-technical/{schema_file}"
         CfnOutput(self, "UploadCommandOutput",
                        value=upload_command,
                        description="AWS CLI command to upload a file to the S3 bucket")
