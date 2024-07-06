@@ -9,7 +9,7 @@
     "/createFeatureRequest": {
       "post": {
         "summary": "Create a new feature request",
-        "description": "Creates a feature request with the featureRequestName, featureRequestDescription, customerName, and returns the feature request ID",
+        "description": "Creatvses a feature request with the featureRequestName, featureRequestDescription, customerName, and returns the feature request ID",
         "parameters": [
           {
             "name": "featureRequestName",

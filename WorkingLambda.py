@@ -1,6 +1,7 @@
 import json
 import random
 import boto3
+import os
 
 #dynamo client
 dynamodb = boto3.client('dynamodb')

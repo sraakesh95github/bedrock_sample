@@ -93,7 +93,6 @@ def updateFeatureRequest(event):
         'body': f"Updated request {featureRequestID} in {tableName}"
     }
 
-    
 def lambda_handler(event, context):
 
     result = ''

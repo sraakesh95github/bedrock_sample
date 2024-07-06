@@ -10,8 +10,8 @@ import base64
 #For this to run on a local machine in VScode, you need to set the AWS_PROFILE environment variable to the name of the profile/credentials you want to use. 
 #You also need to input your model ID near the bottom of this file.
 
-os.environ["AWS_PROFILE"] = "agent-demo"
-region=os.environ['AWS_REGION'] = "us-west-2"
+os.environ["AWS_PROFILE"] = "default"
+region=os.environ['AWS_REGION'] = "us-west-1"
 
 def sigv4_request(
     url,
@@ -130,7 +130,7 @@ def decode_response(response):
 
 def lambda_handler(event, context):
     
-    agentId = "XXXXXX" #INPUT YOUR AGENT ID HERE
+    agentId = "OR1BD9ZOTD" #INPUT YOUR AGENT ID HERE
     agentAliasId = "TSTALIASID" # Hits draft alias, set to a specific alias id for a deployed version
     sessionId = event["sessionId"]
     question = event["question"]
