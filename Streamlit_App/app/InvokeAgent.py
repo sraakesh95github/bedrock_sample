@@ -11,7 +11,7 @@ import base64
 #You also need to input your model ID near the bottom of this file.
 
 os.environ["AWS_PROFILE"] = "default"
-region=os.environ['AWS_REGION'] = "us-west-1"
+region=os.environ['AWS_REGION'] = "us-west-2"
 
 def sigv4_request(
     url,
@@ -131,7 +131,7 @@ def decode_response(response):
 def lambda_handler(event, context):
     
     agentId = "UWTS1NIM1A" #INPUT YOUR AGENT ID HERE
-    agentAliasId = "TSTALIASID" # Hits draft alias, set to a specific alias id for a deployed version
+    agentAliasId = "98M7NTEECG" # Hits draft alias, set to a specific alias id for a deployed version
     sessionId = event["sessionId"]
     question = event["question"]
     endSession = False
